@@ -1,0 +1,22 @@
+{
+  "name": "twilio-stt-gspeech",
+  "version": "1.0.0",
+  "description": "",
+  "main": "lib/index.js",
+  "types": "lib",
+  "scripts": {
+    "build": "tsc -p .",
+    "watch": "tsc -p . --watch",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Chiraj",
+  "license": "ISC",
+  "dependencies": {
+    "@types/events": "^3.0.0",
+    "@types/ws": "^6.0.3",
+    "ws": "^7.2.0"
+  },
+  "devDependencies": {
+    "typescript": "^3.6.4"
+  }
+}
