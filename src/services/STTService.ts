@@ -1,5 +1,7 @@
 import { EventEmitter } from 'events';
 
+import logger from '../winston';
+
 class STTEventEmitter extends EventEmitter {}
 
 class STTService {
@@ -10,10 +12,10 @@ class STTService {
         this.sttEventEmitter = new STTEventEmitter();
     }
 
-    createEvent(callSid: string) {
-        console.log('create event...', callSid);
-        this.sttEventEmitter.on(callSid, (data: string) => console.log("STT", data));
-    }
+    // createEvent(callSid: string) {
+    //     logger.debug('create event... '+callSid);
+    //     this.sttEventEmitter.on(callSid, (data: string) => logger.debug("STT "+ data));
+    // }
 
     emit(callSid: string, data: string) {
         this.sttEventEmitter.emit(callSid, data);
@@ -21,10 +23,12 @@ class STTService {
 
     listen(callSid: string, timeout: number = 15000) {
 
-        console.log("Listening...");
+        logger.info("Listening... "+callSid);
         return new Promise((resolve: Function, reject: Function) => {
 
-            let timer: NodeJS.Timeout = setTimeout(() => reject(), timeout);
+            let timer: NodeJS.Timeout = setTimeout(() => {
+                reject("No event was triggered...")
+            }, timeout);
             this.sttEventEmitter.on(callSid, (data: string) => {
 
                 clearTimeout(timer);
@@ -38,4 +42,6 @@ class STTService {
     }
 }
 
-export default new STTService();
+// const sstService = new STTService();
+// export default sstService;
+export default STTService;
